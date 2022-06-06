@@ -81,6 +81,37 @@ namespace CompAndDel
             PictureProvider finalprovider3 = new PictureProvider();
             finalprovider3.SavePicture(finalimage3, @"C:\Users\FIT\Desktop\Git2\libros\PII_Pipes_Filters_RodrigoC\src\Program\Filteredluke.jpg");            
 
+            //Ejercicio 4
+            
+            PictureProvider p4 = new PictureProvider();
+            IPicture picture4 = p.GetPicture(@"C:\Users\FIT\Desktop\Git2\libros\PII_Pipes_Filters_RodrigoC\src\Program\beer.jpg");
+
+            PipeNull pipeNull4 = new PipeNull();
+            FilterSave filterSaveNegative4 = new FilterSave();
+            PipeSerial pipeSerialNegativeSave4 = new PipeSerial(filterSaveNegative4, pipeNull4);
+            FilterNegative filterNegative4 = new FilterNegative();
+            PipeSerial pipeSerialNegative4 = new PipeSerial(filterNegative4, pipeSerialNegativeSave4);
+            FilterTwitter filterTwitterGreyscale4 = new FilterTwitter();
+            PipeSerial pipeSerialGreyscaleTwitter4 = new PipeSerial(filterTwitterGreyscale4, pipeNull4);
+            FilterConditional filterConditional = new FilterConditional();
+            PipeConditionalFork pipeConditionalFork = new PipeConditionalFork(filterConditional, pipeSerialGreyscaleTwitter4, pipeSerialNegative4);
+            FilterSave filterSaveGreyscale4 = new FilterSave();
+            PipeSerial pipeSerialGreyscaleSave4 = new PipeSerial(filterSaveGreyscale4, pipeConditionalFork);
+            FilterGreyscale filterGreyscale4 = new FilterGreyscale();
+            PipeSerial pipeSerialGreyscale4 = new PipeSerial(filterGreyscale4, pipeSerialGreyscaleSave4);
+            
+             
+
+            filterSaveGreyscale4.ChangePath(@"C:\Users\FIT\Desktop\Git2\libros\PII_Pipes_Filters_RodrigoC\src\Program\Greyscalebeer.jpg");
+            filterSaveNegative4.ChangePath(@"C:\Users\FIT\Desktop\Git2\libros\PII_Pipes_Filters_RodrigoC\src\Program\Negativebeer.jpg");
+            filterConditional.ChangePath(@"C:\Users\FIT\Desktop\Git2\libros\PII_Pipes_Filters_RodrigoC\src\Program\Greyscalebeer.jpg");
+            filterTwitterGreyscale4.ChangePath(@"C:\Users\FIT\Desktop\Git2\libros\PII_Pipes_Filters_RodrigoC\src\Program\Greyscalebeer.jpg");
+
+
+            IPicture finalimage4 = pipeSerialGreyscale4.Send(picture4);
+            
+            PictureProvider finalprovider4 = new PictureProvider();
+            finalprovider4.SavePicture(finalimage4, @"C:\Users\FIT\Desktop\Git2\libros\PII_Pipes_Filters_RodrigoC\src\Program\Filteredbeer.jpg");
         }
     }
 }
