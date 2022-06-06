@@ -81,7 +81,8 @@ namespace CompAndDel
             PictureProvider finalprovider3 = new PictureProvider();
             finalprovider3.SavePicture(finalimage3, @"C:\Users\FIT\Desktop\Git2\libros\PII_Pipes_Filters_RodrigoC\src\Program\Filteredluke.jpg");            
 
-            //Ejercicio 4
+            //Ejercicio 4 Como la imagen utilizada es beer al correr el programa retorna "No face Found"
+            // y continua por PipeSerialNegative4.
             
             PictureProvider p4 = new PictureProvider();
             IPicture picture4 = p.GetPicture(@"C:\Users\FIT\Desktop\Git2\libros\PII_Pipes_Filters_RodrigoC\src\Program\beer.jpg");
